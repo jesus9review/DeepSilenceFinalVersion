@@ -8,7 +8,7 @@ public class UIInventario : MonoBehaviour
     private GameObject panelInventario;
     //public GameObject cameraController;
 
-    private bool juegoPausado = false;
+    public bool juegoPausado = false;
     public FirstPersonController jugador;
 
     public GameObject PanelNotas;
