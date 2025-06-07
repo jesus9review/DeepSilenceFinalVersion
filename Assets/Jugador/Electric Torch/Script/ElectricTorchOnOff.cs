@@ -36,6 +36,9 @@ public class ElectricTorchOnOff : MonoBehaviour
     [SerializeField] AudioSource FlashlightSounds;
     [SerializeField] AudioClip onSound;
     [SerializeField] AudioClip offSound;
+	public UIInventario UIInventario;
+
+
 
 
     private void Awake()
@@ -78,48 +81,53 @@ public class ElectricTorchOnOff : MonoBehaviour
 
 	void InputKey()
     {
-		if (MantenerPresionado)
+		if (!UIInventario.juegoPausado)
 		{
-            if (Input.GetKeyDown(_kCode) && _flashLightOn == false)
+            if (MantenerPresionado)
             {
-				FlashlightSounds.clip = onSound;
-				FlashlightSounds.Play();
-				if(intensityLight == 0)
-				{
-                    _flashLightOn = false;
-                } else
-				{
-                    _flashLightOn = true;
+                if (Input.GetKeyDown(_kCode) && _flashLightOn == false)
+                {
+                    FlashlightSounds.clip = onSound;
+                    FlashlightSounds.Play();
+                    if (intensityLight < 30)
+                    {
+                        _flashLightOn = false;
+                    }
+                    else
+                    {
+                        _flashLightOn = true;
+                    }
+
                 }
+                if (Input.GetKeyUp(_kCode) && _flashLightOn == true)
+                {
+                    _flashLightOn = false;
+                    FlashlightSounds.clip = offSound;
+                    FlashlightSounds.Play();
 
+                }
             }
-            if (Input.GetKeyUp(_kCode) && _flashLightOn == true)
+            else
             {
-                _flashLightOn = false;
-               FlashlightSounds.clip = offSound;
-                FlashlightSounds.Play();
+                if (Input.GetKeyDown(_kCode) && _flashLightOn == false)
+                {
+                    if (intensityLight == 0)
+                    {
+                        _flashLightOn = false;
+                    }
+                    else
+                    {
+                        _flashLightOn = true;
+                    }
 
-            }
-		}
-		else
-		{
-            if (Input.GetKeyDown(_kCode) && _flashLightOn == false)
-            {
-                if (intensityLight == 0)
+                }
+                if (Input.GetKeyDown(_kCode) && _flashLightOn == true)
                 {
                     _flashLightOn = false;
                 }
-                else
-                {
-                    _flashLightOn = true;
-                }
-
-            }
-            if (Input.GetKeyDown(_kCode) && _flashLightOn == true)
-            {
-                _flashLightOn = false;
             }
         }
+		
 		
 
     }
