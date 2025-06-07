@@ -80,8 +80,8 @@ public class ElectricTorchOnOff : MonoBehaviour
 	}
 
 	void InputKey()
-    {
-		if (!UIInventario.juegoPausado)
+	{
+	if (!UIInventario.juegoPausado)
 		{
             if (MantenerPresionado)
             {

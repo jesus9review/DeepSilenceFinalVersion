@@ -23,29 +23,30 @@ public class Inventario : MonoBehaviour
         Debug.DrawRay(inicioRayCast.position, inicioRayCast.forward, Color.red);
 
         /////BUSCA SI RECOJO EL OBJETO CORRECTO///////
-        
-            if (Physics.Raycast(inicioRayCast.position, inicioRayCast.forward, out hit, 10)) {
-                if (Input.GetKey(KeyCode.F))
+
+        if (Physics.Raycast(inicioRayCast.position, inicioRayCast.forward, out hit, 10)) {
+            if (Input.GetKey(KeyCode.F))
+            {
+                for (int i = 0; i < nombreObjetos.ItemsString.Length; i++)
                 {
-                    for (int i = 0; i < nombreObjetos.ItemsString.Length; i++)
+                    if (hit.collider.CompareTag(nombreObjetos.ItemsString[i]))
                     {
-                        if (hit.collider.CompareTag(nombreObjetos.ItemsString[i]))
-                        {
-                            Destroy(hit.collider.gameObject);
+                        Destroy(hit.collider.gameObject);
                         RecogerObjeto();
-                        }
                     }
                 }
             }
+        }
     }
 
     void RecogerObjeto()
     {
-        for(int i=0; i < baseDeDatosJugador.slotsBasicos.Length; i++)
+        for (int i = 0; i < baseDeDatosJugador.slotsBasicos.Length; i++)
         {
-            if (baseDeDatosJugador.slotsBasicos[i] == "") {
-                 baseDeDatosJugador.slotsBasicos[i] = hit.collider.tag;
-                 break;
+            if (baseDeDatosJugador.slotsBasicos[i] == "")
+            {
+                baseDeDatosJugador.slotsBasicos[i] = hit.collider.tag;
+                break;
             }
         }
     }
