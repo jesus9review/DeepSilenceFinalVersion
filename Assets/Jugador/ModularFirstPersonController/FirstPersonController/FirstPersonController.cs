@@ -1,10 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public int golpesRestantes = 3;
+
+    [Header("Audio")]
+    public AudioSource respiracionAudioSource;
+    public AudioSource pasosAudioSource;
+    public AudioClip sonidoDolor;
+    public AudioClip caminarClip;
+    public AudioClip correrClip;
+    public AudioClip saltoClip;
+    public AudioClip gritoDolor;
+    public AudioClip respiracionCalmadaNormal;
+    public AudioClip respiracionAceleradaSprint;
+    public AudioClip respiracionAceleradaCooldown;
+
+    [Header("Cámara y Efectos")]
+    public Transform playerCamera1;
+    private Vector3 camaraPosInicial;
+    public Image sangrePantalla;
+    public GameObject pantallaGameOver;
+
+    [Header("Game Over")]
+    public float tiempoReinicio = 4f;
+
     [SerializeField] private Transform flashlightTransform; // Asigna esto en el Inspector
     [SerializeField] private Vector3 flashlightBobAmount = new Vector3(0.02f, 0.02f, 0f);
     [SerializeField] private float flashlightBobSpeed = 6f;
@@ -13,14 +37,7 @@ public class FirstPersonController : MonoBehaviour
     private float flashlightBobTimer = 0f;
 
     private Rigidbody rb;
-    public AudioSource pasosAudioSource;
-    public AudioSource respiracionAudioSource;
-    public AudioClip caminarClip;
-    public AudioClip correrClip;
-    public AudioClip saltoClip;
-    public AudioClip respiracionCalmadaNormal;
-    public AudioClip respiracionAceleradaSprint;
-    public AudioClip respiracionAceleradaCooldown;
+    
     [SerializeField] private Vector3 standingCamPos = new Vector3(0f, 1.2f, 0f);
     [SerializeField] private Vector3 crouchingCamPos = new Vector3(0f, 0.2f, 0f);
     [SerializeField] private float crouchTransitionSpeed = 6f;
@@ -162,6 +179,9 @@ public class FirstPersonController : MonoBehaviour
 
     void Start()
     {
+        if (pantallaGameOver != null)
+            pantallaGameOver.SetActive(false);
+
         if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -626,6 +646,137 @@ public class FirstPersonController : MonoBehaviour
             );
         }
     }
+
+    public void RecibirDanio()
+    {
+        if (golpesRestantes <= 0) return;
+
+        golpesRestantes--;
+
+        // Sonido de dolor
+        if (sonidoDolor != null && respiracionAudioSource != null)
+        respiracionAudioSource.clip = sonidoDolor;
+        respiracionAudioSource.Play();
+
+        // Efecto de sangre en pantalla
+        if (sangrePantalla != null)
+        {
+            float alpha = 1f - (golpesRestantes / 3f); // más rojo con más daño
+            sangrePantalla.color = new Color(1, 0, 0, alpha * 0.6f); // rojo semitransparente
+        }
+
+        // Iniciar sacudida intensa
+        if (playerCamera1 != null)
+            StartCoroutine(SacudirCamara(1.5f, 1f));
+            StartCoroutine(SacudirLinterna(1.5f, 1f));
+
+        // Game Over
+        if (golpesRestantes <= 0)
+        {
+            StartCoroutine(AnimacionMuerte());
+        }
+    }
+
+    private IEnumerator SacudirCamara(float duracion, float intensidad)
+    {
+        Vector3 posicionInicial = playerCamera1.localPosition;
+        float tiempo = 0f;
+
+        while (tiempo < duracion)
+        {
+            float desplazamientoX = Mathf.Sin(tiempo * 10f) * intensidad * (1f - (tiempo / duracion));
+            float desplazamientoY = Mathf.Cos(tiempo * 8f) * intensidad * (1f - (tiempo / duracion));
+
+            playerCamera1.localPosition = Vector3.Lerp(playerCamera1.localPosition,
+                posicionInicial + new Vector3(desplazamientoX, desplazamientoY, 0f),
+                0.4f);
+
+            tiempo += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        playerCamera1.localPosition = posicionInicial;
+    }
+    public IEnumerator SacudirLinterna(float duracion, float intensidad)
+    {
+        float tiempo = 0f;
+        Vector3 originalPos = flashlightOriginalPos;
+
+        while (tiempo < duracion)
+        {
+            float offsetX = Mathf.Sin(tiempo * 8f) * intensidad * (1f - (tiempo / duracion));
+            float offsetY = Mathf.Cos(tiempo * 6f) * intensidad * (1f - (tiempo / duracion));
+
+            flashlightTransform.localPosition = Vector3.Lerp(
+                flashlightTransform.localPosition,
+                originalPos + new Vector3(offsetX, offsetY, 0f),
+                0.4f
+            );
+
+            tiempo += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        flashlightTransform.localPosition = originalPos;
+    }
+    private IEnumerator AnimacionMuerte()
+    {
+        float duracion = 1.5f;
+        float tiempo = 0f;
+
+        Quaternion rotacionInicial = playerCamera1.localRotation;
+        Quaternion rotacionFinal = Quaternion.Euler(270f, playerCamera1.localEulerAngles.y, 0f); // Mira hacia arriba
+
+        while (tiempo < duracion)
+        {
+            playerCamera1.localRotation = Quaternion.Slerp(rotacionInicial, rotacionFinal, tiempo / duracion);
+            tiempo += Time.deltaTime;
+            yield return null;
+        }
+
+        playerCamera1.localRotation = rotacionFinal;
+
+        cameraCanMove = false;
+        yield return new WaitForSeconds(3f);
+
+        StartCoroutine(MostrarGameOverPanel());
+    }
+
+
+    private IEnumerator MostrarGameOverPanel()
+    {
+        float duracion = 1f;
+        float tiempo = 0f;
+        pantallaGameOver.SetActive(true);
+        CanvasGroup cg = pantallaGameOver.GetComponent<CanvasGroup>();
+
+        if (cg == null)
+        {
+            cg = pantallaGameOver.AddComponent<CanvasGroup>();
+        }
+
+        cg.alpha = 0f;
+
+        while (tiempo < duracion)
+        {
+            cg.alpha = Mathf.Lerp(0f, 1f, tiempo / duracion);
+            tiempo += Time.deltaTime;
+            yield return null;
+        }
+
+        cg.alpha = 1f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
+
+    public void ReiniciarNivel()
+    {
+        Time.timeScale = 1f;
+        cameraCanMove = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
 
 
