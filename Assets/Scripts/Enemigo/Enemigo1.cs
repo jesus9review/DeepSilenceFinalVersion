@@ -12,6 +12,14 @@ public class Enemigo1 : MonoBehaviour
     public float SensibilidadSonido = 0.5f;
     public float TiempoMaxPersecucion = 10f;
     public float tiempoEsperaFlash = 3f;
+    [Header("Sonidos del Enemigo")]
+    public AudioSource audioSource;
+    public AudioClip sonidoCorrer;
+    public AudioClip sonidoAtacar;
+    public AudioClip sonidoAgonia;
+    public AudioClip sonidoAlerta;
+    public AudioClip sonidoFlashazo;
+
 
     public NavMeshAgent IA;
     public bool Alerta = false;
@@ -32,6 +40,7 @@ public class Enemigo1 : MonoBehaviour
         Anim = GetComponent<Animator>();
         Jugador = GameObject.Find("Jugador");
         posicionInicial = transform.position;
+        ReproducirSonido(sonidoAgonia);
     }
 
     void Update()
@@ -112,12 +121,13 @@ public class Enemigo1 : MonoBehaviour
 
         if (visionJugador.cameraLooking && linterna._flashLightOn && Vector3.Distance(transform.position, Jugador.transform.position) <= DistMin)
         {
-            RecibirFlash();
+            StartCoroutine(RecibirFlash());
         }
     }
 
     IEnumerator ActivarAlerta()
     {
+        ReproducirSonido(sonidoAlerta);
         Alerta = true;
         Anim.SetBool("Alerta", true);
         Anim.SetBool("Agonia", false);
@@ -145,6 +155,10 @@ public class Enemigo1 : MonoBehaviour
 
     public void Perseguir()
     {
+        if (!audioSource.isPlaying || audioSource.clip != sonidoCorrer)
+        {
+            ReproducirSonido(sonidoCorrer);
+        }
         IA.SetDestination(Jugador.transform.position);
         Anim.SetBool("Correr", true);
         Anim.SetBool("Agonia", false);
@@ -158,9 +172,26 @@ public class Enemigo1 : MonoBehaviour
         Anim.SetBool("Correr", false);
         Anim.SetBool("Alerta", false);
         Anim.SetBool("Agonia", true);
+        ReproducirSonido(sonidoAgonia);
     }
 
-    public void RecibirFlash()
+    private void ReproducirSonido(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.Stop(); // Evita que se mezclen sonidos
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+    }
+
+    void HacerDano()
+    {
+        datosJugador.RecibirDanio();
+    }
+
+
+    private IEnumerator RecibirFlash()
     {
         aturdido = true;
         Persiguiendo = false;
@@ -168,6 +199,8 @@ public class Enemigo1 : MonoBehaviour
         Anim.SetTrigger("Flashazo");
         Anim.SetBool("Alerta", true);
         Anim.SetBool("Correr", false);
+        ReproducirSonido(sonidoFlashazo);
+        yield return new WaitForSeconds(3f);
     }
 
     private IEnumerator RecuperarseDelFlash()
