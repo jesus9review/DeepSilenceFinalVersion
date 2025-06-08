@@ -10,6 +10,7 @@ public class UIInventario : MonoBehaviour
 
     public bool juegoPausado = false;
     public FirstPersonController jugador;
+    public NotaController notaController;
 
     public GameObject PanelNotas;
     public GameObject PanelObjetos;
@@ -31,6 +32,9 @@ public class UIInventario : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
+            if (notaController != null && notaController.siNotaActiva)
+                return;
+
             // Si el juego no está pausado, abre el inventario
             if (!juegoPausado)
             {

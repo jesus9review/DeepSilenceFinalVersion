@@ -10,6 +10,7 @@ TagManager:
   - nota1
   - nota2
   - linterna
+  - nota3
   layers:
   - Default
   - TransparentFX

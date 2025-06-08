@@ -10,6 +10,8 @@ public class Inventario : MonoBehaviour
     private BaseDeDatosJugador baseDeDatosJugador;
     private RaycastHit hit;
 
+    public NotaController notaController;
+
 
     private void Awake()
     {
@@ -20,17 +22,27 @@ public class Inventario : MonoBehaviour
 
     void Update()
     {
+        if (notaController.siNotaActiva) return;
+
         Debug.DrawRay(inicioRayCast.position, inicioRayCast.forward, Color.red);
 
         /////BUSCA SI RECOJO EL OBJETO CORRECTO///////
 
-        if (Physics.Raycast(inicioRayCast.position, inicioRayCast.forward, out hit, 10)) {
+        if (Physics.Raycast(inicioRayCast.position, inicioRayCast.forward, out hit, 10)) 
+        {
             if (Input.GetKey(KeyCode.F))
             {
                 for (int i = 0; i < nombreObjetos.ItemsString.Length; i++)
                 {
                     if (hit.collider.CompareTag(nombreObjetos.ItemsString[i]))
                     {
+
+                        // Si es una nota
+                        if (hit.collider.CompareTag("nota1"))
+                        {
+                            notaController.MostrarNota(); // Muestra la UI de la nota
+                        }
+
                         Destroy(hit.collider.gameObject);
                         RecogerObjeto();
                     }
