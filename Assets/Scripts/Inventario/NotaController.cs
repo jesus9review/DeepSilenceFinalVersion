@@ -7,6 +7,9 @@ public class NotaController : MonoBehaviour
     private bool siNotaActivada = false;
     public bool siNotaActiva => siNotaActivada;
 
+    private GameObject inventarioUI; // Referencia al inventario
+    private bool volverAlInventario = false; // Desde dónde se abrió
+
     void Update()
     {
         if (siNotaActivada && Input.GetKeyDown(KeyCode.Escape))
@@ -15,7 +18,8 @@ public class NotaController : MonoBehaviour
         }
     }
 
-    public void MostrarNota(GameObject notaGO)
+    // desdeInventario indica si se abrió desde el inventario
+    public void MostrarNota(GameObject notaGO, bool desdeInventario = false)
     {
         if (notaActualMostrada != null)
             notaActualMostrada.SetActive(false);
@@ -24,6 +28,8 @@ public class NotaController : MonoBehaviour
         notaActualMostrada.SetActive(true);
         Time.timeScale = 0f;
         siNotaActivada = true;
+
+        volverAlInventario = desdeInventario;
     }
 
     public void CerrarNota()
@@ -34,5 +40,13 @@ public class NotaController : MonoBehaviour
         notaActualMostrada = null;
         Time.timeScale = 1f;
         siNotaActivada = false;
+
+        if (volverAlInventario && inventarioUI != null)
+            inventarioUI.SetActive(true);
+    }
+
+    public void SetInventarioReferencia(GameObject inventario)
+    {
+        inventarioUI = inventario;
     }
 }

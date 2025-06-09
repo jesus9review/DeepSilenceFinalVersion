@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,6 @@ using TMPro;
 
 public class InventarioObjetos : MonoBehaviour
 {
-
     public GameObject contenedorInventario;
     private NombresObjetos objetosDisponibles;
     private BaseDeDatosJugador objetosObtenidos;
@@ -16,9 +15,9 @@ public class InventarioObjetos : MonoBehaviour
 
     public TextMeshProUGUI textoObjetos;
 
-    //IconosObjetos
     public GameObject objetoInventario;
-    
+
+    public NotaController notaController;
 
     void Awake()
     {
@@ -26,14 +25,11 @@ public class InventarioObjetos : MonoBehaviour
         panelNotas = transform.GetChild(1);
     }
 
-    // Start is called before the first frame update
     void OnEnable()
     {
-
         objetosDisponibles = contenedorInventario.GetComponent<NombresObjetos>();
         objetosObtenidos = contenedorInventario.GetComponent<BaseDeDatosJugador>();
 
-        
         for (int i = panelObjetos.childCount - 1; i >= 0; i--)
         {
             GameObject.Destroy(panelObjetos.GetChild(i).gameObject);
@@ -44,12 +40,9 @@ public class InventarioObjetos : MonoBehaviour
             GameObject.Destroy(panelNotas.GetChild(i).gameObject);
         }
 
-
-        //Notas
         for (int i = 0; i < objetosDisponibles.ItemsString.Length; i++)
         {
             string item = objetosDisponibles.ItemsString[i];
-
 
             int j = 0;
             while (j < objetosObtenidos.slotsBasicos.Length)
@@ -59,11 +52,27 @@ public class InventarioObjetos : MonoBehaviour
                     GameObject objeto;
                     Sprite icono;
 
-                    if (item.Substring(0, 4) == "nota")
+                    if (item.StartsWith("nota"))
                     {
                         objeto = Instantiate(objetoInventario, panelNotas);
                         icono = Resources.Load<Sprite>("IconosInventario/nota");
-                        
+
+                        string numeroStr = item.Replace("nota", "");
+                        if (int.TryParse(numeroStr, out int indexNota))
+                        {
+                            indexNota -= 1;
+                            if (indexNota >= 0 && indexNota < notaController.notasVisuales.Length)
+                            {
+                                GameObject notaGO = notaController.notasVisuales[indexNota];
+
+                                objeto.GetComponent<Button>().onClick.AddListener(() =>
+                                {
+                                    gameObject.SetActive(false); // Oculta inventario
+                                    notaController.SetInventarioReferencia(gameObject);
+                                    notaController.MostrarNota(notaGO, true); // Indica que viene del inventario
+                                });
+                            }
+                        }
                     }
                     else
                     {
@@ -72,19 +81,13 @@ public class InventarioObjetos : MonoBehaviour
                     }
 
                     string itemDescripcion = objetosDisponibles.ItemsDescripcion[j];
-
                     objeto.transform.GetChild(0).GetComponent<Image>().sprite = icono;
                     objeto.transform.GetComponent<InfoObjeto>().info = itemDescripcion;
-                    
 
                     break;
                 }
                 j++;
             }
-
         }
-
-
     }
-
 }

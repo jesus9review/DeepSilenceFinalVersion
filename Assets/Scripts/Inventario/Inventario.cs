@@ -47,7 +47,7 @@ public class Inventario : MonoBehaviour
                                 if (indexNota >= 0 && indexNota < notaController.notasVisuales.Length)
                                 {
                                     GameObject notaGO = notaController.notasVisuales[indexNota];
-                                    notaController.MostrarNota(notaGO);
+                                    notaController.MostrarNota(notaGO); // desdeInventario = false por defecto
                                 }
                             }
                         }
