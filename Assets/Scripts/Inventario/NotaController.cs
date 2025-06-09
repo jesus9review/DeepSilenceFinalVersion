@@ -10,6 +10,9 @@ public class NotaController : MonoBehaviour
     private GameObject inventarioUI; // Referencia al inventario
     private bool volverAlInventario = false; // Desde dónde se abrió
 
+    public GameObject barraRuido;
+    public GameObject barraBateria;
+
     void Update()
     {
         if (siNotaActivada && Input.GetKeyDown(KeyCode.Escape))
@@ -30,6 +33,9 @@ public class NotaController : MonoBehaviour
         siNotaActivada = true;
 
         volverAlInventario = desdeInventario;
+
+        barraBateria.SetActive(false);
+        barraRuido.SetActive(false);
     }
 
     public void CerrarNota()
@@ -43,6 +49,9 @@ public class NotaController : MonoBehaviour
 
         if (volverAlInventario && inventarioUI != null)
             inventarioUI.SetActive(true);
+
+        barraBateria.SetActive(true);
+        barraRuido.SetActive(true);
     }
 
     public void SetInventarioReferencia(GameObject inventario)
