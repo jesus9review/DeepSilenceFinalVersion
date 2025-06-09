@@ -3095,6 +3095,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 91e36c29b9a1c71498168912e26f1c55,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1092408308860062549, guid: 91e36c29b9a1c71498168912e26f1c55,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3889,7 +3894,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67096127af0b2842a818271614ab553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemigo: {fileID: 1306327237}
+  Enemigos:
+  - {fileID: 1351309106}
+  - {fileID: 1051326893}
+  - {fileID: 2084661298}
+  - {fileID: 688207273}
+  - {fileID: 1721453185}
   CamaraJugador: {fileID: 1555589431}
   centerThreshold: 0.5
   cameraLooking: 0
@@ -4985,6 +4995,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 91e36c29b9a1c71498168912e26f1c55,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1092408308860062549, guid: 91e36c29b9a1c71498168912e26f1c55,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5431,7 +5446,7 @@ MonoBehaviour:
   capasObstaculos:
     serializedVersion: 2
     m_Bits: 128
-  tiempoMaxSinVer: 3
+  tiempoMaxSinVer: 5
   IA: {fileID: 688207276}
   Alerta: 0
   Anim: {fileID: 688207277}
@@ -6720,6 +6735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 91e36c29b9a1c71498168912e26f1c55,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1092408308860062549, guid: 91e36c29b9a1c71498168912e26f1c55,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7166,7 +7186,7 @@ MonoBehaviour:
   capasObstaculos:
     serializedVersion: 2
     m_Bits: 128
-  tiempoMaxSinVer: 3
+  tiempoMaxSinVer: 5
   IA: {fileID: 1051326896}
   Alerta: 0
   Anim: {fileID: 1051326897}
@@ -9163,7 +9183,7 @@ MonoBehaviour:
   capasObstaculos:
     serializedVersion: 2
     m_Bits: 128
-  tiempoMaxSinVer: 3
+  tiempoMaxSinVer: 5
   IA: {fileID: 1351309105}
   Alerta: 0
   Anim: {fileID: 1351309102}
@@ -10991,6 +11011,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 91e36c29b9a1c71498168912e26f1c55,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1092408308860062549, guid: 91e36c29b9a1c71498168912e26f1c55,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11437,7 +11462,7 @@ MonoBehaviour:
   capasObstaculos:
     serializedVersion: 2
     m_Bits: 128
-  tiempoMaxSinVer: 3
+  tiempoMaxSinVer: 5
   IA: {fileID: 1721453188}
   Alerta: 0
   Anim: {fileID: 1721453189}
@@ -13831,6 +13856,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 91e36c29b9a1c71498168912e26f1c55,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1092408308860062549, guid: 91e36c29b9a1c71498168912e26f1c55,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14277,7 +14307,7 @@ MonoBehaviour:
   capasObstaculos:
     serializedVersion: 2
     m_Bits: 128
-  tiempoMaxSinVer: 3
+  tiempoMaxSinVer: 5
   IA: {fileID: 2084661301}
   Alerta: 0
   Anim: {fileID: 2084661302}
