@@ -12,7 +12,6 @@ public class Inventario : MonoBehaviour
 
     public NotaController notaController;
 
-
     private void Awake()
     {
         contenedorCodigos = GameObject.FindGameObjectWithTag("Player");
@@ -26,41 +25,52 @@ public class Inventario : MonoBehaviour
 
         Debug.DrawRay(inicioRayCast.position, inicioRayCast.forward, Color.red);
 
-        /////BUSCA SI RECOJO EL OBJETO CORRECTO///////
-
-        if (Physics.Raycast(inicioRayCast.position, inicioRayCast.forward, out hit, 10)) 
+        if (Physics.Raycast(inicioRayCast.position, inicioRayCast.forward, out hit, 10))
         {
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
+                string tagObjeto = hit.collider.tag;
+
+                // Verifica si el tag está en la lista de objetos válidos
                 for (int i = 0; i < nombreObjetos.ItemsString.Length; i++)
                 {
-                    if (hit.collider.CompareTag(nombreObjetos.ItemsString[i]))
+                    if (tagObjeto == nombreObjetos.ItemsString[i])
                     {
-
-                        // Si es una nota
-                        if (hit.collider.CompareTag("nota1"))
+                        // Si el tag empieza con "nota"
+                        if (tagObjeto.StartsWith("nota"))
                         {
-                            notaController.MostrarNota(); // Muestra la UI de la nota
+                            // Ej: nota1 -> índice 0
+                            string numeroStr = tagObjeto.Replace("nota", "");
+                            if (int.TryParse(numeroStr, out int indexNota))
+                            {
+                                indexNota -= 1;
+                                if (indexNota >= 0 && indexNota < notaController.notasVisuales.Length)
+                                {
+                                    GameObject notaGO = notaController.notasVisuales[indexNota];
+                                    notaController.MostrarNota(notaGO);
+                                }
+                            }
                         }
 
+                        // Guarda el objeto recogido y lo destruye
+                        RecogerObjeto(tagObjeto);
                         Destroy(hit.collider.gameObject);
-                        RecogerObjeto();
+                        break;
                     }
                 }
             }
         }
     }
 
-    void RecogerObjeto()
+    void RecogerObjeto(string tagObjeto)
     {
         for (int i = 0; i < baseDeDatosJugador.slotsBasicos.Length; i++)
         {
             if (baseDeDatosJugador.slotsBasicos[i] == "")
             {
-                baseDeDatosJugador.slotsBasicos[i] = hit.collider.tag;
+                baseDeDatosJugador.slotsBasicos[i] = tagObjeto;
                 break;
             }
         }
     }
-
 }

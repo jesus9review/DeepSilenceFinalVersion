@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class NotaController : MonoBehaviour
 {
-    public GameObject notaUIPanel;
+    public GameObject[] notasVisuales; // UI de cada nota
+    private GameObject notaActualMostrada;
     private bool siNotaActivada = false;
     public bool siNotaActiva => siNotaActivada;
-
 
     void Update()
     {
@@ -15,16 +15,23 @@ public class NotaController : MonoBehaviour
         }
     }
 
-    public void MostrarNota()
+    public void MostrarNota(GameObject notaGO)
     {
-        notaUIPanel.SetActive(true);
+        if (notaActualMostrada != null)
+            notaActualMostrada.SetActive(false);
+
+        notaActualMostrada = notaGO;
+        notaActualMostrada.SetActive(true);
         Time.timeScale = 0f;
         siNotaActivada = true;
     }
 
     public void CerrarNota()
     {
-        notaUIPanel.SetActive(false);
+        if (notaActualMostrada != null)
+            notaActualMostrada.SetActive(false);
+
+        notaActualMostrada = null;
         Time.timeScale = 1f;
         siNotaActivada = false;
     }

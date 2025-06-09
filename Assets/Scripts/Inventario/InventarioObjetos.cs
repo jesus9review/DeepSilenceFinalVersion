@@ -84,25 +84,7 @@ public class InventarioObjetos : MonoBehaviour
 
         }
 
-        //Objetos
-        /* for (int i = 0; i < objetosDisponibles.ItemsString.Length; i++)
-         {
-             string item = objetosDisponibles.ItemsString[i];
-             if (item.Substring(0, 4) != "nota")
-             {
-                 int j = 0;
-                 while (j < objetosObtenidos.slotsBasicos.Length)
-                 {
-                     if (item == objetosObtenidos.slotsBasicos[j])
-                     {
-                         //Instantiate()
-                         print("Tengo este objeto " + objetosObtenidos.slotsBasicos[j]);
-                         break;
-                     }
-                     j++;
-                 }
-             }     
-         }*/
+
     }
 
 }
