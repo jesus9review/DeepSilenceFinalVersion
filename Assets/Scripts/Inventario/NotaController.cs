@@ -7,11 +7,12 @@ public class NotaController : MonoBehaviour
     private bool siNotaActivada = false;
     public bool siNotaActiva => siNotaActivada;
 
-    private GameObject inventarioUI; // Referencia al inventario
-    private bool volverAlInventario = false; // Desde dónde se abrió
+    private GameObject inventarioUI;
+    private bool volverAlInventario = false;
+    private bool mostrarPanelesExtraAlCerrar = false;
 
-    public GameObject barraRuido;
     public GameObject barraBateria;
+    public GameObject barraRuido;
 
     void Update()
     {
@@ -21,7 +22,6 @@ public class NotaController : MonoBehaviour
         }
     }
 
-    // desdeInventario indica si se abrió desde el inventario
     public void MostrarNota(GameObject notaGO, bool desdeInventario = false)
     {
         if (notaActualMostrada != null)
@@ -33,9 +33,11 @@ public class NotaController : MonoBehaviour
         siNotaActivada = true;
 
         volverAlInventario = desdeInventario;
+        mostrarPanelesExtraAlCerrar = !desdeInventario; // Solo mostrar si viene desde el juego
 
-        barraBateria.SetActive(false);
-        barraRuido.SetActive(false);
+        // Oculta paneles extra siempre
+        if (barraRuido != null) barraRuido.SetActive(false);
+        if (barraBateria != null) barraBateria.SetActive(false);
     }
 
     public void CerrarNota()
@@ -47,11 +49,17 @@ public class NotaController : MonoBehaviour
         Time.timeScale = 1f;
         siNotaActivada = false;
 
-        if (volverAlInventario && inventarioUI != null)
-            inventarioUI.SetActive(true);
+        // Mostrar paneles extra solo si la nota venía desde el juego
+        if (mostrarPanelesExtraAlCerrar)
+        {
+            if (barraRuido != null) barraRuido.SetActive(true);
+            if (barraBateria != null) barraBateria.SetActive(true);
+        }
 
-        barraBateria.SetActive(true);
-        barraRuido.SetActive(true);
+        if (volverAlInventario && inventarioUI != null)
+        {
+            inventarioUI.SetActive(true);
+        }
     }
 
     public void SetInventarioReferencia(GameObject inventario)

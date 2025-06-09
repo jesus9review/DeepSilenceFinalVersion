@@ -39,14 +39,12 @@ public class UIInventario : MonoBehaviour
             if (!juegoPausado)
             {
                 AbrirInventario();
-                ruido.SetActive(false);
-                bateria.SetActive(false);
+                
             }
             else
             {
                 CerrarInventario();
-                ruido.SetActive(true);
-                bateria.SetActive(true);
+                
             }
         }
     }
@@ -62,6 +60,9 @@ public class UIInventario : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        ruido.SetActive(false);
+        bateria.SetActive(false);
     }
 
     public void CerrarInventario()
@@ -73,6 +74,9 @@ public class UIInventario : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
+
+        ruido.SetActive(true);
+        bateria.SetActive(true);
     }
 
     public void ActivarPanelNotas()
