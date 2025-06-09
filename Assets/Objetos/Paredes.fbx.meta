@@ -1,0 +1,244 @@
+fileFormatVersion: 2
+guid: 58029bf4bcf367e479b85f6a6f29e148
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BALDOSAAZULADASUCIA
+    second: {fileID: 2100000, guid: 3a0bf075c3126ce41a2bfb6774d7c8d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BALDOSABLANCASUCIA.001
+    second: {fileID: 2100000, guid: 537256d63b8226248aaf485bf67296e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAREDDOBLEBALDOSA
+    second: {fileID: 2100000, guid: c059c2290c5dfab45b6d1e9e5f17c51f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAREDESPIEDRA
+    second: {fileID: 2100000, guid: c05769e2061fd7a4a8760174967e2bde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAREDESSUCIASRUGOSAS.001
+    second: {fileID: 2100000, guid: b136e87ea27d2184cadf82b1f8cf1f28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAREDRASGADA
+    second: {fileID: 2100000, guid: e7edbc48f69f93743aaa09d6a508f203, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAREDRASGADADOBLE
+    second: {fileID: 2100000, guid: 9a1feda1a183e904aad0245db09132dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VALDOSAPAREDVERDE
+    second: {fileID: 2100000, guid: 28a9065fc702a6d40adcb968ed2c4878, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 25diff
+    second: {fileID: 2800000, guid: 3794cbb129f5f3742973cbfef27bb96f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 25norm
+    second: {fileID: 2800000, guid: 66d9578681c3999498a27fd63ab77d94, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 26diff
+    second: {fileID: 2800000, guid: 5b6d6df7b2e2fc44e986c6c8ea5c8fac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 26norm
+    second: {fileID: 2800000, guid: 32b5b4fac11bb6545a86acb881d178ba, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 38diff
+    second: {fileID: 2800000, guid: 475c9795f87ef5547b35185486157861, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 38norm
+    second: {fileID: 2800000, guid: 6ca9c16dd50bb9c43bb41c5fb20854c0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 44diff
+    second: {fileID: 2800000, guid: ed6af6ea705ff1c4c823701c27907d71, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 44norm
+    second: {fileID: 2800000, guid: 5e1c7d1a0edfa30438824416d0e34570, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 46diff
+    second: {fileID: 2800000, guid: dd265b0d299f08340ac8a35a0ef87363, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 46norm
+    second: {fileID: 2800000, guid: 8d708879e7f366848bb07b752fc7155e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_wall_003_diff_1k
+    second: {fileID: 2800000, guid: 18cebd6654ff19e4bad50b7e08c109b7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_wall_003_nor_gl_1k
+    second: {fileID: 2800000, guid: 8b7782fcbd8a9b84d94c743901f710f7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_wall_003_rough_1k
+    second: {fileID: 2800000, guid: cba135c48ce54644dbbd16d2fd6f0018, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: large_floor_tiles_02_diff_1k
+    second: {fileID: 2800000, guid: e5bdccf317fa059488fee18b9c7f8074, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: large_floor_tiles_02_nor_gl_1k
+    second: {fileID: 2800000, guid: 0541beafc54d3084595482037437dd3a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: large_floor_tiles_02_rough_1k
+    second: {fileID: 2800000, guid: 7cc559fd7bb7c5a4f9b091a0dd1d865e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: mossy_cobblestone_diff_1k
+    second: {fileID: 2800000, guid: d5a72335748d2fa4a94e6bb79b05bbb1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: mossy_cobblestone_nor_gl_1k
+    second: {fileID: 2800000, guid: b05a605437c3ee549a54155ddbd0574b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: mossy_cobblestone_rough_1k
+    second: {fileID: 2800000, guid: 3b911c366b448b94d9229ec25b3be41c, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MenuPrincipal.unity
+    guid: e0ae621cdadac594793122f0d07e8387
+  - enabled: 1
     path: Assets/Scenes/SceneTest Jesus.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}
